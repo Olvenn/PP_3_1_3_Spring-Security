@@ -3,6 +3,7 @@ package springSecurity.models;
 //import jakarta.persistence.Entity;
 //import org.hibernate.annotations.Table;
 //
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -54,14 +55,40 @@ public class User {
         return password;
     }
 
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "role")
+    private String role;
+
+    public User() {
+    }
+
+    public User(String name, String surname, String username, String email) {
+        this.name = name;
+        this.surname = surname;
+        this.username = username;
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
 
-    @Column(name = "password")
-    private String password;
+    public String getSurname() {
+        return surname;
+    }
 
-    public User() {
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getUsername() {
@@ -70,12 +97,6 @@ public class User {
 
     public void setUsername(String userName) {
         this.username = userName;
-    }
-
-    public User(String name, String userName, String email) {
-        this.name = name;
-        this.username = userName;
-        this.email = email;
     }
 
     public long getId() {
