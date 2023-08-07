@@ -27,8 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws  Exception {
         // конфигурируем сам Spring Security
         // конфигурируем авторизацию
-        http.csrf().disable()// отключаем защиту от межсайтовой подделки запросов
-                .authorizeRequests()
+        http.authorizeRequests()
                 .antMatchers("/auth/login", "/newUser", "/auth/registration","/error").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -45,15 +44,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // Настраиваем аутентификацию
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(personDetailsService);
-//                auth.userDetailsService(personDetailsService)
-//                .passwordEncoder(getPasswordEncoder());
+//        auth.userDetailsService(personDetailsService);
+                auth.userDetailsService(personDetailsService)
+                .passwordEncoder(getPasswordEncoder());
     }
 
     // означает, что пароль никак не шифруется
     @Bean
     public PasswordEncoder getPasswordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+
+        return new BCryptPasswordEncoder();
+//        return NoOpPasswordEncoder.getInstance();
     }
 }
 

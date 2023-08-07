@@ -34,11 +34,14 @@ public class User {
 
 
     @NotEmpty(message = "Name should not be empty")
-    @Size(min = 2, max = 500, message = "Name should be between 2 and 30 characters")
+    @Size(min = 3, max = 30, message = "Name should be between 3 and 30 characters")
     @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "last_name", nullable = false)
+    private String surname;
+
+    @Column(name = "login", nullable = false)
     private String username;
 
     @NotEmpty(message = "Email should not be empty")
@@ -46,7 +49,7 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Size(min = 3, max = 30, message = "Password should be between 3 and 30 characters")
+    @Size(min = 2, message = "Password should min 2 characters")
     public String getPassword() {
         return password;
     }

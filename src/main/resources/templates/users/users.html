@@ -29,6 +29,11 @@
 
     <br/>
     <hr/>
+    <form th:action="@{/logout}" th:method="POST">
+        <button class="btn btn-outline-primary">
+            <input th:type="submit" th:value="Logout"/>
+        </button>
+    </form>
     <button class="btn btn-outline-primary">
         <a href="/logout">Logout</a>
     </button>
