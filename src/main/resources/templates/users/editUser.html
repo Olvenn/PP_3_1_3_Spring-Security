@@ -5,10 +5,21 @@
     <title>Update person</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<body>
-
 </head>
 <body>
+
+<header>
+    <hr>
+    <br>
+    <form th:action="@{/logout}" th:method="POST">
+        <button class="btn btn-outline-primary">
+            <input th:type="submit" th:value="Logout"/>
+        </button>
+    </form>
+    <br>
+    <hr>
+    <br>
+</header>
 
 <form th:method="PATCH" th:action="@{/{id}(id=${user.getId()})}" th:object="${user}" class="form-group">
     <div class="form-group">
@@ -29,7 +40,12 @@
         <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
     </div>
     <br/>
-    <input type="submit" value="Update!" class="btn btn-info" />
+    <input type="submit" value="Update!" class="btn btn-info"/>
+</form>
+
+
+<form th:method="DELETE" th:action="@{{id}(id=${user.getId()})}">
+    <input type="submit" value="Delete" class="btn btn-danger" style="width: 200px;"/>
 </form>
 
 </body>

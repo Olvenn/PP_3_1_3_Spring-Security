@@ -5,6 +5,18 @@
     <title>Title</title>
 </head>
 <body>
+<header>
+    <hr>
+    <br>
+    <form th:action="@{/logout}" th:method="POST">
+        <button class="btn btn-outline-primary">
+            <input th:type="submit" th:value="Logout"/>
+        </button>
+    </form>
+    <br>
+    <hr>
+    <br>
+</header>
 Admin only
 </body>
 </html>

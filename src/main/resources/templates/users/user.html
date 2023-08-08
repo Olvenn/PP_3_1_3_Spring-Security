@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>User</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"><body>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
-  <h2 class="card-title">User:</h2>
-  <h4 th:text="${user.getName() + ', ' + user.getUsername()}">VALUE</h4>
-  <h5 th:text="${'Email: ' + user.getEmail()}">VALUE</h5>
-  <h5 th:text="${user.getId()}">VALUE</h5>
+<header>
+    <hr>
+    <br>
+    <form th:action="@{/logout}" th:method="POST">
+        <button class="btn btn-outline-primary">
+            <input th:type="submit" th:value="Logout"/>
+        </button>
+    </form>
+    <br>
+    <hr>
+    <br>
+</header>
+<h2 class="card-title">User:</h2>
+<h4 th:text="${user.getName() + ', ' + user.getUsername()}">VALUE</h4>
+<h5 th:text="${'Email: ' + user.getEmail()}">VALUE</h5>
+<h5 th:text="${user.getId()}">VALUE</h5>
 
-  <button class="btn btn-outline-success" style="width: 200px;">
+<button class="btn btn-outline-success" style="width: 200px;">
     <a th:href="@{{id}/edit(id=${user.getId()})}">Edit</a>
-  </button>
+</button>
 
-  <br>
-  <br>
+<br>
+<br>
 
-  <form th:method="DELETE" th:action="@{{id}(id=${user.getId()})}">
-    <input type="submit" value="Delete" class="btn btn-danger"  style="width: 200px;"/>
-  </form>
-  </body>
+</body>
 </html>

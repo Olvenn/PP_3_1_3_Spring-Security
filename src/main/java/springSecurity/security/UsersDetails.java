@@ -8,7 +8,7 @@ import springSecurity.models.User;
 import java.util.Collection;
 import java.util.Collections;
 
-public class UsersDetails  implements UserDetails {
+public class UsersDetails implements UserDetails {
     private final User person;
 
     public UsersDetails(User person) {
@@ -17,7 +17,7 @@ public class UsersDetails  implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO: rerurn roles(or authorities) on the user ROLE_ADMIN or ROLE_USER
+        // TODO: return roles(or authorities) on the user ROLE_ADMIN or ROLE_USER
         return Collections.singletonList(new SimpleGrantedAuthority(person.getRole()));
     }
 

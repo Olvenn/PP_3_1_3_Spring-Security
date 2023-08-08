@@ -2,18 +2,17 @@ package springSecurity.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import springSecurity.models.User;
-import springSecurity.service.UserService;
 import springSecurity.service.UserServiceImp;
 import springSecurity.util.UserValidator;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/")
@@ -21,13 +20,14 @@ public class UsersController {
 
     private UserServiceImp userService;
     private final UserValidator userValidator;
-
+    private final UserValidator UsersDetailsService;
 
     @Autowired
-    public UsersController(UserServiceImp userService, UserValidator userValidator) {
+    public UsersController(UserServiceImp userService, UserValidator userValidator, UserValidator usersDetailsService) {
 
         this.userService = userService;
         this.userValidator = userValidator;
+        UsersDetailsService = usersDetailsService;
     }
 
     @GetMapping()
@@ -44,26 +44,12 @@ public class UsersController {
         return "users/user";
     }
 
-//    @GetMapping("/newUser")
-//    public String showAddUserForm(@ModelAttribute("user") User user) {
-//        return "users/newUser";
-//    }
-//
-//    @PostMapping("/")
-//    public String createUser(@ModelAttribute("user") @Valid User user,
-//                             BindingResult bindingResult) {
-//
-//        userValidator.validate(user, bindingResult);
-//
-//        if (bindingResult.hasErrors()) {
-//            return "/users/newUser";
-//        }
-//
-//
-//        userService.saveUser(user);
-//
-//        return "redirect:/auth/login";
-//    }
+
+    @GetMapping("/user")
+    public String showUser(Model model, Principal principal) {
+        model.addAttribute("user", userService.findByUsername(principal.getName()));
+        return "users/user";
+    }
 
     @GetMapping("/{id}/edit")
     public String showUpdateUserForm(Model model, @PathVariable("id") long id) {

@@ -1,6 +1,8 @@
 package springSecurity.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,9 +34,6 @@ public class UserServiceImp implements UserService {
     @Transactional
     @Override
     public void saveUser(User user) {
-//        String pass = passwordEncoder.encode(user.getPassword());
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        user.setPassword(pass);
         userRepository.save(user);
     }
 
@@ -60,5 +59,8 @@ public class UserServiceImp implements UserService {
         userRepository.deleteById(id);
     }
 
-
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
+    }
 }

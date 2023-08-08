@@ -33,4 +33,6 @@ public class UserValidator  implements Validator {
         errors.rejectValue("username", "", "Человек с таким именем пользователя уже существует");
 
     }
+
+
 }
